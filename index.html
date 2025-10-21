@@ -1,26 +1,198 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Project Mythology 3D</title>
-  <link rel="stylesheet" href="style.css">
+  
+  <!-- Fonte e ícones -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ====== RESET ====== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      scroll-behavior: smooth;
+    }
+
+    /* ====== BASE ====== */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url('epic-dragon-background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #f2f2f2;
+      text-shadow: 1px 1px 3px #000;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ====== OVERLAY ====== */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.65);
+      z-index: -1;
+    }
+
+    /* ====== HEADER ====== */
+    header {
+      background: rgba(0, 0, 0, 0.8);
+      border-bottom: 2px solid #ff6a00;
+      text-align: center;
+      padding: 30px 10px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(6px);
+    }
+
+    header h1 {
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: 3rem;
+      color: #ff6a00;
+      text-shadow: 0 0 10px #ff6a00;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: #f2f2f2;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1em;
+      transition: color 0.3s, transform 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    nav a:hover {
+      color: #ff6a00;
+      transform: scale(1.1);
+    }
+
+    /* ====== SECTIONS ====== */
+    section {
+      background: rgba(0, 0, 0, 0.6);
+      margin: 60px auto;
+      padding: 50px 30px;
+      max-width: 900px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(255, 69, 0, 0.4);
+      backdrop-filter: blur(4px);
+      animation: fadeIn 1.5s ease;
+    }
+
+    section h2 {
+      color: #ff6a00;
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: 2.3em;
+      margin-bottom: 25px;
+      text-align: center;
+      text-shadow: 0 0 8px #ff6a00;
+    }
+
+    section p, section ul {
+      font-size: 1.1em;
+      line-height: 1.7;
+    }
+
+    section ul {
+      list-style: disc;
+      margin-left: 30px;
+    }
+
+    /* ====== BANNER ====== */
+    #banner {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6));
+      text-align: center;
+      font-family: 'Cinzel Decorative', cursive;
+    }
+
+    #banner h2 {
+      font-size: 2.5em;
+      color: #ff6a00;
+      margin-bottom: 15px;
+      text-shadow: 0 0 15px #ff6a00;
+      animation: glow 2.5s ease-in-out infinite alternate;
+    }
+
+    #banner p {
+      font-size: 1.3em;
+      opacity: 0.9;
+    }
+
+    /* ====== FOOTER ====== */
+    footer {
+      background: rgba(0, 0, 0, 0.8);
+      border-top: 2px solid #ff6a00;
+      text-align: center;
+      padding: 25px;
+      margin-top: auto;
+      font-size: 0.9em;
+    }
+
+    footer p {
+      opacity: 0.8;
+    }
+
+    /* ====== ANIMAÇÕES ====== */
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #ff6a00, 0 0 10px #ff6a00; }
+      to { text-shadow: 0 0 20px #ffaa33, 0 0 30px #ff6a00; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ====== RESPONSIVO ====== */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+      nav ul {
+        gap: 20px;
+      }
+      section {
+        margin: 30px 15px;
+        padding: 30px 20px;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
     <h1>Project Mythology 3D</h1>
     <nav>
       <ul>
-        <li><a href="#historia">História do Jogo</a></li>
+        <li><a href="#historia">História</a></li>
         <li><a href="#como-jogar">Como Jogar</a></li>
-        <li><a href="#desenvolvedores">Desenvolvedores</a></li>
+        <li><a href="#desenvolvedores">Equipe</a></li>
       </ul>
     </nav>
   </header>
 
   <section id="banner">
-    <h2>O despertar dos Deuses começa</h2>
-    <p>Em breve...</p>
+    <h2>O Despertar dos Deuses Começa</h2>
+    <p>Prepare-se para a batalha...</p>
   </section>
 
   <section id="historia">

@@ -1,54 +1,65 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Project Mythology 3D</title>
-  
-  <!-- Fonte e ícones -->
+
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-  
+
   <style>
-    /* ====== RESET ====== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    /* ===== RESET ===== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; scroll-behavior: smooth; }
 
-    html, body {
-      height: 100%;
-      scroll-behavior: smooth;
-    }
-
-    /* ====== BASE ====== */
+    /* ===== BACKGROUND (poster) ===== */
     body {
       font-family: 'Poppins', sans-serif;
-      background: url('epic-dragon-background.jpg') no-repeat center center fixed;
-      background-size: cover;
       color: #f2f2f2;
-      text-shadow: 1px 1px 3px #000;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
+      min-height: 100%;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+        url('dragon-poster.webp');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      text-shadow: 1px 1px 3px #000;
     }
 
-    /* ====== OVERLAY ====== */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.65);
-      z-index: -1;
+    @supports (background-image: url("dragon-poster.jpg")) {
+      body {
+        background-image:
+          linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+          url('dragon-poster.jpg');
+      }
     }
 
-    /* ====== HEADER ====== */
+    /* Mobile fallback */
+    @media (max-width: 900px) {
+      body {
+        background-image:
+          linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+          url('dragon-poster-mobile.webp');
+        background-attachment: scroll;
+      }
+      @supports (background-image: url("dragon-poster-mobile.jpg")) {
+        body {
+          background-image:
+            linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+            url('dragon-poster-mobile.jpg');
+        }
+      }
+    }
+
+    /* ===== HEADER ===== */
     header {
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0,0,0,0.7);
       border-bottom: 2px solid #ff6a00;
+      padding: 26px 12px;
       text-align: center;
-      padding: 30px 10px;
       position: sticky;
       top: 0;
       z-index: 10;
@@ -57,10 +68,10 @@
 
     header h1 {
       font-family: 'Cinzel Decorative', cursive;
-      font-size: 3rem;
+      font-size: 2.6rem;
       color: #ff6a00;
       text-shadow: 0 0 10px #ff6a00;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       letter-spacing: 2px;
     }
 
@@ -68,113 +79,114 @@
       list-style: none;
       display: flex;
       justify-content: center;
-      gap: 40px;
+      gap: 30px;
       flex-wrap: wrap;
     }
 
     nav a {
-      color: #f2f2f2;
+      color: #fff;
       text-decoration: none;
       font-weight: 600;
-      font-size: 1.1em;
-      transition: color 0.3s, transform 0.3s;
       text-transform: uppercase;
       letter-spacing: 1px;
+      transition: 0.25s;
     }
 
     nav a:hover {
       color: #ff6a00;
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
 
-    /* ====== SECTIONS ====== */
-    section {
-      background: rgba(0, 0, 0, 0.6);
-      margin: 60px auto;
-      padding: 50px 30px;
-      max-width: 900px;
-      border-radius: 15px;
-      box-shadow: 0 0 15px rgba(255, 69, 0, 0.4);
+    /* ===== MAIN CONTENT ===== */
+    main {
+      width: 100%;
+      max-width: 1120px;
+      margin: 40px auto;
+      padding: 0 20px;
+      flex: 1 0 auto;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.6));
+      border-radius: 12px;
+      padding: 36px;
+      margin: 28px 0;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6), 0 0 12px rgba(255,106,0,0.06);
       backdrop-filter: blur(4px);
+      color: #f5f5f5;
       animation: fadeIn 1.5s ease;
     }
 
-    section h2 {
-      color: #ff6a00;
+    .card h2 {
       font-family: 'Cinzel Decorative', cursive;
-      font-size: 2.3em;
-      margin-bottom: 25px;
+      color: #ff6a00;
+      font-size: 2rem;
+      margin-bottom: 18px;
       text-align: center;
       text-shadow: 0 0 8px #ff6a00;
     }
 
-    section p, section ul {
-      font-size: 1.1em;
+    .card p, .card ul {
+      font-size: 1.05rem;
       line-height: 1.7;
     }
 
-    section ul {
+    .card ul {
       list-style: disc;
-      margin-left: 30px;
+      margin-left: 25px;
     }
 
-    /* ====== BANNER ====== */
+    /* ===== HERO SECTION ===== */
     #banner {
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 70px 20px;
       text-align: center;
-      font-family: 'Cinzel Decorative', cursive;
     }
 
     #banner h2 {
-      font-size: 2.5em;
+      font-size: 2.3rem;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
       color: #ff6a00;
-      margin-bottom: 15px;
       text-shadow: 0 0 15px #ff6a00;
       animation: glow 2.5s ease-in-out infinite alternate;
+      font-family: 'Cinzel Decorative', cursive;
     }
 
     #banner p {
-      font-size: 1.3em;
-      opacity: 0.9;
+      font-size: 1.15rem;
+      opacity: 0.95;
     }
 
-    /* ====== FOOTER ====== */
+    /* ===== FOOTER ===== */
     footer {
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0,0,0,0.75);
       border-top: 2px solid #ff6a00;
       text-align: center;
-      padding: 25px;
-      margin-top: auto;
-      font-size: 0.9em;
+      padding: 18px;
+      margin-top: 30px;
+      font-size: 0.95rem;
     }
 
-    footer p {
-      opacity: 0.8;
-    }
-
-    /* ====== ANIMAÇÕES ====== */
+    /* ===== ANIMATIONS ===== */
     @keyframes glow {
       from { text-shadow: 0 0 5px #ff6a00, 0 0 10px #ff6a00; }
       to { text-shadow: 0 0 20px #ffaa33, 0 0 30px #ff6a00; }
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ====== RESPONSIVO ====== */
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
-      header h1 {
-        font-size: 2.2rem;
-      }
-      nav ul {
-        gap: 20px;
-      }
-      section {
-        margin: 30px 15px;
-        padding: 30px 20px;
-      }
+      header h1 { font-size: 1.9rem; }
+      .card { padding: 22px; margin: 18px 0; }
+      #banner { padding: 48px 16px; }
     }
   </style>
 </head>
@@ -183,46 +195,48 @@
     <h1>Project Mythology 3D</h1>
     <nav>
       <ul>
-        <li><a href="#historia">História</a></li>
-        <li><a href="#como-jogar">Como Jogar</a></li>
-        <li><a href="#desenvolvedores">Equipe</a></li>
+        <li><a href="#story">Story</a></li>
+        <li><a href="#gameplay">How to Play</a></li>
+        <li><a href="#team">Developers</a></li>
       </ul>
     </nav>
   </header>
 
-  <section id="banner">
-    <h2>O Despertar dos Deuses Começa</h2>
-    <p>Prepare-se para a batalha...</p>
-  </section>
+  <main>
+    <section id="banner" class="card">
+      <h2>The Awakening of the Gods Begins</h2>
+      <p>Prepare for battle...</p>
+    </section>
 
-  <section id="historia">
-    <h2>História do Jogo</h2>
-    <p>Em um mundo devastado por guerras entre deuses antigos, um novo herói surge para restaurar o equilíbrio. Enfrente criaturas mitológicas, descubra segredos ancestrais e decida o destino dos reinos sagrados.</p>
-  </section>
+    <section id="story" class="card">
+      <h2>Game Story</h2>
+      <p>In a world torn apart by ancient wars among gods, a new hero rises to restore balance. Face mythological creatures, uncover ancient secrets, and decide the fate of the sacred realms.</p>
+    </section>
 
-  <section id="como-jogar">
-    <h2>Como Jogar</h2>
-    <ul>
-      <li>Explore ambientes 3D com controles intuitivos.</li>
-      <li>Derrote inimigos usando habilidades divinas.</li>
-      <li>Resolva enigmas para desbloquear artefatos lendários.</li>
-      <li>Personalize seu personagem com itens mitológicos.</li>
-    </ul>
-  </section>
+    <section id="gameplay" class="card">
+      <h2>How to Play</h2>
+      <ul>
+        <li>Explore immersive 3D environments with intuitive controls.</li>
+        <li>Defeat enemies using divine abilities.</li>
+        <li>Solve puzzles to unlock legendary artifacts.</li>
+        <li>Customize your hero with mythological gear.</li>
+      </ul>
+    </section>
 
-  <section id="desenvolvedores">
-    <h2>Desenvolvedores</h2>
-    <p>Este projeto foi criado por uma equipe apaixonada por mitologia e tecnologia 3D:</p>
-    <ul>
-      <li>Luiz Ferreira – Diretor Criativo</li>
-      <li>Ana Costa – Designer de Personagens</li>
-      <li>Rafael Lima – Programador Líder</li>
-      <li>Camila Rocha – Roteirista</li>
-    </ul>
-  </section>
+    <section id="team" class="card">
+      <h2>Developers</h2>
+      <p>This project was created by a passionate team of artists and developers inspired by mythology and 3D technology:</p>
+      <ul>
+        <li>Luiz Ferreira – Creative Director</li>
+        <li>Ana Costa – Character Designer</li>
+        <li>Rafael Lima – Lead Programmer</li>
+        <li>Camila Rocha – Writer</li>
+      </ul>
+    </section>
+  </main>
 
   <footer>
-    <p>&copy; 2025 Project Mythology 3D. Todos os direitos reservados.</p>
+    <p>&copy; 2025 Project Mythology 3D. All rights reserved.</p>
   </footer>
 </body>
 </html>
